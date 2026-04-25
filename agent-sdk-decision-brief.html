@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Claude Agent SDK + OpenClaw · CEO's Framework Decision · 2026</title>
+<meta name="description" content="One-page khuyến nghị cho CEO/Founder: Tại sao chọn Claude Agent SDK kết hợp OpenClaw thay vì LangChain, OpenAI Agents SDK, Mastra, Vercel AI SDK trong năm 2026.">
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --red:#C22620;
+  --red-dark:#8B1A16;
+  --red-light:#FCEBEB;
+  --gold:#D4AF37;
+  --gold-dark:#B8941F;
+  --gold-light:#FFFDF0;
+  --gold-bg:#FAF3E0;
+  --dark:#1a1a1a;
+  --text:#2a2a2a;
+  --text2:#444;
+  --text3:#5f5f5f;
+  --light:#f8f7f4;
+  --white:#fff;
+  --border:#e0dbd3;
+  --shadow:0 4px 24px rgba(0,0,0,.08);
+  --shadow-lg:0 8px 40px rgba(0,0,0,.12);
+  --code-bg:#1a1a1a;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter','Segoe UI',system-ui,sans-serif;
+  background:var(--white);
+  color:var(--dark);
+  line-height:1.65;
+  overflow-x:hidden;
+  position:relative;
+  font-size:16px;
+}
+
+/* Watermark */
+body::before{
+  content:'AGENT SDK · OPENCLAW · AGENT SDK · OPENCLAW · AGENT SDK · OPENCLAW · AGENT SDK · OPENCLAW';
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Oswald',sans-serif;
+  font-size:140px;font-weight:700;
+  color:rgba(194,38,32,.022);
+  transform:rotate(-30deg);
+  letter-spacing:8px;
+  pointer-events:none;
+  white-space:nowrap;overflow:hidden;
+  z-index:1;line-height:2;word-spacing:40px;
+}
+
+.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:10}
+.container-narrow{max-width:980px;margin:0 auto;padding:0 24px;position:relative;z-index:10}
+
+h1,h2,h3,h4,h5,h6{font-family:'Oswald',sans-serif;font-weight:600;letter-spacing:.2px;line-height:1.25}
+
+/* NAV */
+.nav{
+  position:fixed;top:0;left:0;right:0;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  z-index:1000;padding:12px 0;
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:0 24px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{
+  width:36px;height:36px;background:var(--red);border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;color:var(--gold);
+}
+.logo-text{font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;color:var(--dark);letter-spacing:1px}
+.logo-sub{font-family:'Oswald',sans-serif;font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{color:var(--text);text-decoration:none;font-size:12.5px;font-weight:500}
+.nav-links a:hover{color:var(--red)}
+.nav-cta{
+  background:var(--red);color:var(--white);
+  padding:9px 20px;border-radius:4px;
+  font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;
+  letter-spacing:.5px;text-transform:uppercase;text-decoration:none;
+}
+@media (max-width:900px){.nav-links a:not(.nav-cta){display:none}}
+
+/* HERO */
+.hero{
+  background:linear-gradient(135deg,var(--red) 0%,var(--red-dark) 100%);
+  color:var(--white);
+  padding:140px 0 100px;
+  position:relative;overflow:hidden;
+  margin-top:60px;
+}
+.hero::before{
+  content:'';position:absolute;right:-120px;top:-120px;
+  width:560px;height:560px;
+  border:2px solid rgba(212,175,55,.1);border-radius:50%;
+}
+.hero::after{
+  content:'';position:absolute;right:60px;top:60px;
+  width:340px;height:340px;
+  border:2px solid rgba(212,175,55,.08);border-radius:50%;
+}
+.hero-inner{position:relative;z-index:5}
+.hero-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:60px;align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:40px}}
+
+.hero-badge{
+  display:inline-block;
+  background:rgba(212,175,55,.2);
+  border:1px solid var(--gold);
+  color:var(--gold);
+  font-family:'Oswald',sans-serif;
+  font-size:11px;font-weight:600;
+  padding:7px 18px;border-radius:4px;
+  letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:24px;
+}
+.hero h1{
+  font-family:'Oswald',sans-serif;
+  font-size:clamp(36px,5.5vw,62px);font-weight:700;
+  color:var(--white);line-height:1.05;
+  margin-bottom:22px;letter-spacing:.5px;
+}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero-sub{
+  font-size:18px;
+  color:rgba(255,255,255,.92);
+  line-height:1.65;margin-bottom:32px;
+  max-width:600px;
+}
+.hero-sub b{color:var(--gold);font-weight:600}
+
+.hero-thesis{
+  background:rgba(0,0,0,.25);
+  border:1px solid rgba(212,175,55,.4);
+  border-radius:14px;
+  padding:32px 30px;
+}
+.thesis-label{
+  font-family:'Oswald',sans-serif;
+  font-size:10px;color:var(--gold);
+  letter-spacing:2.5px;text-transform:uppercase;
+  margin-bottom:12px;
+}
+.thesis-stmt{
+  font-family:'Oswald',sans-serif;
+  font-size:22px;color:var(--white);
+  line-height:1.35;
+}
+.thesis-stmt em{font-style:normal;color:var(--gold)}
+.thesis-divider{
+  width:50px;height:2px;background:var(--gold);
+  margin:18px 0;
+}
+.thesis-stack{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-top:18px;
+}
+.stack-item{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(212,175,55,.25);
+  padding:14px 16px;border-radius:8px;
+}
+.stack-tag{
+  font-family:'Oswald',sans-serif;
+  font-size:9.5px;color:var(--gold);
+  letter-spacing:1.5px;text-transform:uppercase;
+  margin-bottom:5px;
+}
+.stack-name{
+  font-family:'Oswald',sans-serif;
+  font-size:15px;color:var(--white);
+  font-weight:600;
+}
+.stack-role{
+  font-size:11.5px;
+  color:rgba(255,255,255,.7);
+  margin-top:3px;
+  line-height:1.45;
+}
+
+/* SECTION COMMON */
+.section{padding:90px 0;position:relative;z-index:10}
+.section-label{
+  display:inline-block;
+  background:var(--red-light);
+  color:var(--red);
+  font-family:'Oswald',sans-serif;
+  font-size:11px;font-weight:600;
+  padding:6px 16px;border-radius:3px;
+  letter-spacing:1.8px;text-transform:uppercase;
+  margin-bottom:18px;
+}
+.section-intro{max-width:840px;margin:0 auto 50px;text-align:center}
+.section-intro h2{
+  font-family:'Oswald',sans-serif;
+  font-size:38px;color:var(--dark);
+  line-height:1.15;margin-bottom:14px;
+}
+.section-intro h2 em{font-style:normal;color:var(--red)}
+.section-intro p{
+  font-size:16.5px;color:var(--text2);
+  line-height:1.75;margin-top:16px;
+}
+.alt-bg{background:var(--light)}
+.alt-bg-2{background:var(--gold-light)}
+
+.en-term{font-style:italic;color:var(--text3);font-size:.92em;font-weight:400}
+
+/* THREE CAMPS */
+.camp-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  margin:30px 0;
+}
+.camp{
+  background:var(--white);
+  border:1.5px solid var(--border);
+  border-top:4px solid var(--red);
+  border-radius:12px;
+  padding:30px 26px;
+}
+.camp.gold-top{border-top-color:var(--gold)}
+.camp-tag{
+  font-family:'Oswald',sans-serif;
+  font-size:10.5px;color:var(--red);
+  letter-spacing:1.8px;text-transform:uppercase;
+  margin-bottom:10px;
+}
+.camp.gold-top .camp-tag{color:var(--gold-dark)}
+.camp h4{
+  font-size:21px;color:var(--dark);
+  margin-bottom:10px;line-height:1.25;
+}
+.camp h4 em{font-style:normal;color:var(--red)}
+.camp.gold-top h4 em{color:var(--gold-dark)}
+.camp-list{
+  list-style:none;padding:0;margin:14px 0 0;
+}
+.camp-list li{
+  padding:7px 0 7px 20px;
+  font-size:13.5px;color:var(--text2);
+  line-height:1.5;
+  position:relative;
+  border-bottom:1px dashed var(--border);
+}
+.camp-list li:last-child{border-bottom:none}
+.camp-list li::before{
+  content:'·';position:absolute;left:6px;top:5px;
+  color:var(--red);font-size:18px;line-height:1;
+}
+.camp-list li b{color:var(--dark);font-weight:600}
+@media (max-width:900px){.camp-grid{grid-template-columns:1fr}}
+
+/* COMPARISON MATRIX */
+.matrix-wrap{
+  background:var(--white);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:var(--shadow-lg);
+  border:1.5px solid var(--border);
+  margin:30px 0;
+  overflow-x:auto;
+}
+.matrix{
+  width:100%;
+  border-collapse:collapse;
+  font-size:13.5px;
+  min-width:920px;
+}
+.matrix thead th{
+  background:var(--red);
+  color:var(--white);
+  font-family:'Oswald',sans-serif;
+  font-size:11px;letter-spacing:1.2px;text-transform:uppercase;
+  padding:18px 14px;
+  text-align:left;
+  font-weight:600;
+  vertical-align:bottom;
+}
+.matrix thead th.featured{
+  background:var(--gold-dark);
+  color:var(--white);
+}
+.matrix thead th.featured .star{
+  display:block;
+  font-size:9px;letter-spacing:1.5px;
+  color:var(--gold-light);
+  margin-bottom:3px;
+}
+.matrix tbody td{
+  padding:14px;
+  border-bottom:1px solid var(--border);
+  border-right:1px solid var(--border);
+  vertical-align:top;
+  line-height:1.5;
+  color:var(--text);
+}
+.matrix tbody td:last-child{border-right:none}
+.matrix tbody tr:last-child td{border-bottom:none}
+.matrix tbody tr:nth-child(even) td{background:var(--light)}
+.matrix tbody td.row-label{
+  font-family:'Oswald',sans-serif;
+  font-size:12px;
+  letter-spacing:1.3px;
+  text-transform:uppercase;
+  color:var(--red-dark);
+  background:var(--gold-bg) !important;
+  border-right:2px solid var(--gold);
+  font-weight:600;
+}
+.matrix tbody td.featured{
+  background:var(--gold-light) !important;
+  font-weight:500;
+  border-right:1px solid var(--gold);
+  border-left:1px solid var(--gold);
+}
+.matrix tbody td b{color:var(--dark);font-weight:600}
+.score{
+  display:inline-block;
+  font-family:'Oswald',sans-serif;
+  font-size:11px;font-weight:600;
+  padding:2px 8px;border-radius:3px;
+  letter-spacing:.8px;
+  margin-bottom:4px;
+}
+.score.s-high{background:var(--gold-bg);color:var(--red-dark);border:1px solid var(--gold)}
+.score.s-mid{background:var(--red-light);color:var(--red-dark)}
+.score.s-low{background:#f0f0f0;color:var(--text3)}
+
+/* WHY CARDS */
+.why-card{
+  background:var(--white);
+  border:1.5px solid var(--border);
+  border-left:5px solid var(--red);
+  border-radius:10px;
+  padding:24px 28px;
+  margin-bottom:14px;
+  display:grid;
+  grid-template-columns:48px 1fr;
+  gap:22px;
+}
+.why-card.gold{border-left-color:var(--gold)}
+.why-num{
+  width:42px;height:42px;
+  background:var(--red);color:var(--gold);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Oswald',sans-serif;
+  font-size:18px;font-weight:700;
+  flex-shrink:0;
+}
+.why-card.gold .why-num{
+  background:var(--gold);color:var(--red-dark);
+}
+.why-body h5{
+  font-family:'Oswald',sans-serif;
+  font-size:18px;color:var(--dark);
+  margin-bottom:8px;
+}
+.why-body h5 em{font-style:normal;color:var(--red)}
+.why-card.gold h5 em{color:var(--gold-dark)}
+.why-body p{
+  font-size:14.5px;color:var(--text);
+  line-height:1.7;margin-bottom:8px;
+}
+.why-evidence{
+  font-size:12.5px;color:var(--text3);
+  font-style:italic;
+  border-top:1px dashed var(--border);
+  padding-top:8px;margin-top:8px;
+}
+.why-evidence::before{
+  content:'EVIDENCE · ';
+  font-style:normal;
+  font-family:'Oswald',sans-serif;
+  font-size:9.5px;letter-spacing:1.5px;
+  color:var(--gold-dark);
+  font-weight:600;
+}
+@media (max-width:700px){.why-card{grid-template-columns:1fr;gap:14px;padding:20px 22px}}
+
+/* TWO-STACK DIAGRAM */
+.diagram-wrap{
+  background:var(--white);
+  border:2px solid var(--gold);
+  border-radius:16px;
+  padding:40px 36px;
+  margin:30px 0;
+}
+.diagram-title{
+  text-align:center;
+  font-family:'Oswald',sans-serif;
+  font-size:14px;color:var(--gold-dark);
+  letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:30px;
+}
+.diagram-grid{
+  display:grid;
+  grid-template-columns:1fr 60px 1fr;
+  gap:0;
+  align-items:stretch;
+}
+.diagram-side{
+  background:var(--light);
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  padding:28px 24px;
+  position:relative;
+}
+.diagram-side.left{border-left:5px solid var(--red)}
+.diagram-side.right{border-left:5px solid var(--gold)}
+.side-tag{
+  font-family:'Oswald',sans-serif;
+  font-size:10px;color:var(--red);
+  letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.diagram-side.right .side-tag{color:var(--gold-dark)}
+.side-name{
+  font-family:'Oswald',sans-serif;
+  font-size:22px;color:var(--dark);
+  margin-bottom:14px;line-height:1.2;
+}
+.side-role{
+  background:var(--white);
+  padding:10px 14px;
+  border-radius:6px;
+  font-size:13px;color:var(--text);
+  margin-bottom:14px;
+  border:1px solid var(--border);
+  font-style:italic;
+  line-height:1.55;
+}
+.side-features{
+  list-style:none;padding:0;
+  font-size:13px;color:var(--text);
+}
+.side-features li{
+  padding:5px 0 5px 22px;
+  position:relative;line-height:1.5;
+}
+.side-features li::before{
+  content:'→';position:absolute;left:0;top:5px;
+  color:var(--red);font-weight:700;
+}
+.diagram-side.right .side-features li::before{color:var(--gold-dark)}
+
+.connector{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+.connector::before{
+  content:'';
+  position:absolute;left:50%;top:0;bottom:0;
+  width:2px;background:var(--gold);
+  transform:translateX(-50%);
+}
+.connector-icon{
+  width:54px;height:54px;
+  background:linear-gradient(135deg,var(--red) 0%,var(--gold) 100%);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:2;
+  color:var(--white);
+  font-family:'Oswald',sans-serif;
+  font-size:11px;font-weight:700;
+  letter-spacing:.5px;
+  text-align:center;
+  line-height:1.1;
+}
+@media (max-width:800px){
+  .diagram-grid{grid-template-columns:1fr;gap:14px}
+  .connector{height:60px;flex-direction:row}
+  .connector::before{left:0;right:0;top:50%;bottom:auto;width:auto;height:2px}
+}
+
+.diagram-bottom{
+  background:var(--gold-bg);
+  border:1px solid var(--gold);
+  border-radius:8px;
+  padding:18px 22px;
+  margin-top:24px;
+  font-size:14px;
+  color:var(--text);
+  line-height:1.65;
+  text-align:center;
+}
+.diagram-bottom b{color:var(--red-dark)}
+
+/* DECISION FRAMEWORK */
+.decision-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+  margin:30px 0;
+}
+.dec-card{
+  background:var(--white);
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  padding:28px 28px;
+  position:relative;
+}
+.dec-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:5px;background:var(--red);
+  border-radius:12px 0 0 12px;
+}
+.dec-icon{
+  font-family:'Oswald',sans-serif;
+  font-size:14px;
+  color:var(--gold);
+  background:var(--red);
+  width:46px;height:46px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  letter-spacing:1px;
+  font-weight:700;
+  margin-bottom:14px;
+}
+.dec-card h5{
+  font-family:'Oswald',sans-serif;
+  font-size:20px;color:var(--dark);
+  margin-bottom:6px;
+}
+.dec-card h5 em{font-style:normal;color:var(--red)}
+.dec-en{
+  font-size:12px;color:var(--text3);
+  font-style:italic;
+  margin-bottom:14px;
+}
+.dec-rows{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.dec-row{
+  padding:9px 12px;
+  background:var(--light);
+  border-radius:6px;
+  font-size:12.5px;
+  line-height:1.5;
+}
+.dec-row .lbl{
+  font-family:'Oswald',sans-serif;
+  font-size:9.5px;color:var(--gold-dark);
+  letter-spacing:1.3px;text-transform:uppercase;
+  display:block;margin-bottom:3px;
+}
+.dec-row .val{color:var(--text)}
+.dec-row.win{background:var(--gold-bg);border:1px solid var(--gold)}
+.dec-row.win .lbl{color:var(--red-dark)}
+.dec-row.win .val b{color:var(--red-dark)}
+@media (max-width:700px){
+  .decision-grid{grid-template-columns:1fr}
+  .dec-rows{grid-template-columns:1fr}
+}
+
+/* MIGRATION TIMELINE */
+.timeline{margin:30px 0}
+.tl-row{
+  display:grid;
+  grid-template-columns:140px 1fr;
+  gap:28px;
+  padding:24px 26px;
+  background:var(--white);
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  margin-bottom:14px;
+  align-items:flex-start;
+  position:relative;
+}
+.tl-row::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:5px;background:var(--red);
+  border-radius:10px 0 0 10px;
+}
+.tl-row.gold::before{background:var(--gold)}
+.tl-period{
+  font-family:'Oswald',sans-serif;
+  font-size:14px;font-weight:600;
+  color:var(--red);letter-spacing:1px;
+}
+.tl-row.gold .tl-period{color:var(--gold-dark)}
+.tl-body h5{
+  font-family:'Oswald',sans-serif;
+  font-size:18px;color:var(--dark);
+  margin-bottom:8px;
+}
+.tl-body p{
+  font-size:14px;color:var(--text);
+  line-height:1.65;
+}
+.tl-deliverable{
+  display:inline-block;
+  background:var(--gold-bg);
+  border:1px solid var(--gold);
+  padding:5px 12px;
+  border-radius:4px;
+  font-size:11.5px;
+  color:var(--red-dark);
+  margin-top:10px;
+  font-family:'Oswald',sans-serif;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  font-weight:600;
+}
+@media (max-width:700px){
+  .tl-row{grid-template-columns:1fr;gap:8px}
+}
+
+/* CALLOUT */
+.callout{
+  background:linear-gradient(135deg,var(--gold-bg) 0%,var(--gold-light) 100%);
+  border:1.5px solid var(--gold);
+  border-radius:10px;
+  padding:22px 26px;
+  margin:24px 0;
+}
+.callout-label{
+  font-family:'Oswald',sans-serif;
+  font-size:11px;color:var(--red-dark);
+  text-transform:uppercase;letter-spacing:2px;
+  margin-bottom:8px;
+  display:flex;align-items:center;gap:8px;
+}
+.callout-label::before{
+  content:'!';
+  display:inline-block;
+  width:20px;height:20px;
+  background:var(--red);color:var(--gold);
+  border-radius:50%;
+  text-align:center;
+  font-size:12px;font-weight:700;
+  line-height:20px;
+}
+.callout p{font-size:15px;color:var(--text);line-height:1.7;margin:0}
+.callout p b{color:var(--red-dark)}
+
+code.inline{
+  font-family:'SF Mono','Monaco','Menlo',monospace;
+  font-size:.88em;
+  background:var(--red-light);
+  border:1px solid rgba(194,38,32,.2);
+  color:var(--red-dark);
+  padding:2px 8px;border-radius:3px;
+  font-weight:500;
+}
+
+/* CLOSING */
+.closing{
+  background:linear-gradient(135deg,var(--red) 0%,var(--red-dark) 100%);
+  color:var(--white);
+  padding:80px 0;text-align:center;
+  position:relative;overflow:hidden;
+  z-index:10;
+}
+.closing::before{
+  content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:700px;height:700px;
+  border:2px solid rgba(212,175,55,.08);border-radius:50%;
+}
+.closing-inner{position:relative;z-index:5;max-width:780px;margin:0 auto;padding:0 24px}
+.closing-badge{
+  display:inline-block;
+  background:rgba(212,175,55,.2);
+  border:1px solid var(--gold);
+  color:var(--gold);
+  font-family:'Oswald',sans-serif;
+  font-size:11px;font-weight:600;
+  padding:7px 18px;border-radius:4px;
+  letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:24px;
+}
+.closing h2{
+  font-family:'Oswald',sans-serif;
+  font-size:clamp(32px,4.5vw,48px);
+  color:var(--white);line-height:1.15;
+  margin-bottom:16px;
+}
+.closing h2 em{font-style:normal;color:var(--gold)}
+.closing p{
+  font-size:16px;
+  color:rgba(255,255,255,.85);
+  line-height:1.7;margin-bottom:6px;
+}
+
+/* FOOTER */
+footer{
+  background:var(--dark);color:rgba(255,255,255,.78);
+  padding:48px 0 26px;position:relative;z-index:10;
+}
+.foot-grid{
+  display:grid;grid-template-columns:1.2fr 1fr;
+  gap:40px;margin-bottom:28px;
+}
+.foot-brand h5{
+  font-family:'Oswald',sans-serif;
+  font-size:18px;color:var(--white);
+  margin-bottom:10px;letter-spacing:.5px;
+}
+.foot-brand p{font-size:13.5px;line-height:1.7}
+.foot-meta{font-size:13px;line-height:1.8}
+.foot-meta h6{
+  font-family:'Oswald',sans-serif;
+  font-size:12px;color:var(--gold);
+  text-transform:uppercase;letter-spacing:2px;
+  margin-bottom:10px;
+}
+.foot-meta a{color:rgba(255,255,255,.78);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.2)}
+.foot-meta a:hover{color:var(--gold)}
+.foot-bottom{
+  border-top:1px solid rgba(255,255,255,.1);
+  padding-top:20px;text-align:center;
+  font-family:'Oswald',sans-serif;
+  font-size:11px;color:rgba(255,255,255,.5);
+  letter-spacing:1.5px;text-transform:uppercase;
+}
+@media (max-width:700px){.foot-grid{grid-template-columns:1fr}}
+
+/* SCROLL-AWARE NAV (Optional smooth) */
+.section-anchor{scroll-margin-top:80px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark">AI</div>
+      <div>
+        <div class="logo-text">SDK · DECISION</div>
+        <div class="logo-sub">CEO Framework Brief</div>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#landscape">Landscape</a>
+      <a href="#matrix">Matrix</a>
+      <a href="#why-sdk">Agent SDK</a>
+      <a href="#why-openclaw">OpenClaw</a>
+      <a href="#two-stack">Two-Stack</a>
+      <a href="#decision">Decision</a>
+      <a href="#migration" class="nav-cta">90 Days</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-badge">CEO / Founder Brief · Apr 2026</div>
+          <h1>Tại sao chúng ta chọn <em>Claude Agent SDK</em> kết hợp <em>OpenClaw</em>.</h1>
+          <p class="hero-sub">
+            Năm 2026 có hơn <b>15 framework agent</b> đang cạnh tranh đầu tư của bạn. Đa số sai vì giải bài toán khác. Tài liệu này là <b>one-sided argument</b> dành cho CEO/Founder: tại sao chiến lược <em>two-stack</em> dùng Claude Agent SDK + OpenClaw cho doanh nghiệp Việt 2026 là quyết định <b>chi phí thấp nhất, time-to-market nhanh nhất, và vendor risk được hedge tốt nhất</b>.
+          </p>
+          <div style="display:flex;gap:14px;flex-wrap:wrap">
+            <a href="#matrix" style="display:inline-block;background:var(--gold);color:var(--red-dark);padding:14px 30px;border-radius:6px;font-family:'Oswald',sans-serif;font-weight:700;font-size:13.5px;letter-spacing:1px;text-transform:uppercase;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.2)">Xem comparison matrix</a>
+            <a href="#decision" style="display:inline-block;background:transparent;color:var(--gold);padding:14px 30px;border-radius:6px;border:1.5px solid var(--gold);font-family:'Oswald',sans-serif;font-weight:600;font-size:13.5px;letter-spacing:1px;text-transform:uppercase;text-decoration:none">CEO decision</a>
+          </div>
+        </div>
+        <div class="hero-thesis">
+          <div class="thesis-label">The thesis</div>
+          <div class="thesis-stmt">Một stack <em>không đủ.</em> Hai stack — <em>không cần thêm.</em></div>
+          <div class="thesis-divider"></div>
+          <div class="thesis-stack">
+            <div class="stack-item">
+              <div class="stack-tag">Production Layer</div>
+              <div class="stack-name">Claude Agent SDK</div>
+              <div class="stack-role">Agent embed trong sản phẩm khách dùng</div>
+            </div>
+            <div class="stack-item">
+              <div class="stack-tag">Automation Layer</div>
+              <div class="stack-name">OpenClaw</div>
+              <div class="stack-role">Tự động hóa nội bộ + hedge vendor risk</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- SECTION 1: LANDSCAPE -->
+<section class="section section-anchor" id="landscape">
+  <div class="container">
+    <div class="section-intro">
+      <span class="section-label">§ 01 · Landscape 2026</span>
+      <h2>Bối cảnh phân mảnh — <em>3 nhóm framework</em></h2>
+      <p>Trước khi quyết định, CEO cần thấy bản đồ thị trường rõ ràng. Mọi agent framework đang competing rơi vào một trong ba nhóm dưới đây — biết nhóm nào để hiểu <em>game</em> nào họ đang chơi.</p>
+    </div>
+
+    <div class="container-narrow" style="padding:0">
+      <div class="camp-grid">
+        <div class="camp">
+          <div class="camp-tag">Nhóm 01 · LLM Provider SDK</div>
+          <h4>Provider-native <em>primitives</em></h4>
+          <p style="font-size:14px;color:var(--text2);margin-bottom:8px">SDK do chính chủ LLM phát hành — tối ưu cho model nhà nhưng có thể support model khác qua compatibility shim.</p>
+          <ul class="camp-list">
+            <li><b>OpenAI Agents SDK</b> — 19K stars, 10.3M downloads/tháng, Python-first</li>
+            <li><b>Google ADK</b> — tích hợp sâu GCP / Vertex AI</li>
+            <li><b>AWS Bedrock Agents</b> — chỉ chạy trên AWS</li>
+            <li><b>Microsoft Agent Framework</b> — .NET / Azure ecosystem</li>
+            <li><b>Claude Agent SDK</b> ★ — <em>candidate trong nhóm này, lý do chọn ở §03</em></li>
+          </ul>
+        </div>
+
+        <div class="camp">
+          <div class="camp-tag">Nhóm 02 · Multi-Provider Framework</div>
+          <h4>Provider-agnostic <em>abstractions</em></h4>
+          <p style="font-size:14px;color:var(--text2);margin-bottom:8px">Framework wrap nhiều LLM provider sau một abstraction chung. Đa năng nhưng thường thêm overhead và có learning curve dốc.</p>
+          <ul class="camp-list">
+            <li><b>LangChain / LangGraph</b> — 24.8K stars, 34.5M dl/tháng. Klarna · Uber · LinkedIn · JPMorgan</li>
+            <li><b>CrewAI</b> — 46K stars, role-based multi-agent</li>
+            <li><b>Mastra</b> — TypeScript-only, Replit + SoftBank đang dùng</li>
+            <li><b>Vercel AI SDK v6</b> — best DX cho React/Next.js, 81 providers</li>
+            <li><b>PydanticAI · AutoGen · Strands</b> — niche cụ thể</li>
+          </ul>
+        </div>
+
+        <div class="camp gold-top">
+          <div class="camp-tag">Nhóm 03 · Self-hosted Runtime</div>
+          <h4>Open-source <em>self-hosted</em></h4>
+          <p style="font-size:14px;color:var(--text2);margin-bottom:8px">Framework cho phép chạy agent trên hạ tầng của bạn, multi-channel messaging, không phụ thuộc cloud vendor cụ thể.</p>
+          <ul class="camp-list">
+            <li><b>OpenClaw</b> ★ — <em>candidate trong nhóm này, lý do chọn ở §04</em></li>
+            <li>180,000+ GitHub stars (lớn nhất trong open-source agent space)</li>
+            <li>ClawHub: 5,700+ community skills</li>
+            <li>Multi-channel: Telegram, WhatsApp, Discord, Slack, Signal, iMessage</li>
+            <li>Multi-model: Claude, Kimi, Llama, Gemini — không lock-in</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Insight quan trọng cho CEO</div>
+        <p>Phần lớn so sánh framework anh đọc trên blog đều <b>trộn ba nhóm này lại</b> như thể chúng đang giải cùng một bài toán. Chúng <em>không</em>. Provider SDK giải production agent embedded trong product. Multi-provider framework giải orchestration phức tạp. Self-hosted runtime giải personal automation và data sovereignty. Quyết định đầu tư đúng = chọn <b>một cái cho mỗi tầng cần thiết</b>, không phải chọn <em>một cái duy nhất</em> cho tất cả.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: COMPARISON MATRIX -->
+<section class="section alt-bg section-anchor" id="matrix">
+  <div class="container">
+    <div class="section-intro">
+      <span class="section-label">§ 02 · Comparison Matrix</span>
+      <h2>9 framework — <em>10 chiều</em> CEO quan tâm</h2>
+      <p>Ma trận này không tập trung vào tính năng kỹ thuật. Nó tập trung vào <b>4 chiều CEO/Founder thực sự cần biết</b>: chi phí, time-to-market, team skill, và vendor risk — cộng với 6 chiều phụ liên quan trực tiếp đến quyết định đầu tư.</p>
+    </div>
+
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th style="min-width:140px">Chiều đánh giá</th>
+            <th class="featured" style="min-width:130px"><span class="star">★ ĐỀ XUẤT</span>Claude Agent SDK</th>
+            <th class="featured" style="min-width:130px"><span class="star">★ ĐỀ XUẤT</span>OpenClaw</th>
+            <th>LangGraph</th>
+            <th>OpenAI Agents SDK</th>
+            <th>Mastra</th>
+            <th>Vercel AI SDK</th>
+            <th>CrewAI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">Best for</td>
+            <td class="featured">Production agent embed trong product · MCP-first</td>
+            <td class="featured">Personal/team automation · multi-channel messaging</td>
+            <td>Stateful multi-step workflow phức tạp</td>
+            <td>Linear handoff agent · simple tool use</td>
+            <td>TypeScript-native chat UI · React app</td>
+            <td>React/Next.js streaming chat</td>
+            <td>Role-based multi-agent collaboration</td>
+          </tr>
+          <tr>
+            <td class="row-label">Language</td>
+            <td class="featured">Python · TypeScript</td>
+            <td class="featured">TypeScript (Node.js)</td>
+            <td>Python · TypeScript</td>
+            <td>Python (TS catching up)</td>
+            <td>TypeScript-only</td>
+            <td>TypeScript</td>
+            <td>Python</td>
+          </tr>
+          <tr>
+            <td class="row-label">Cost model</td>
+            <td class="featured"><span class="score s-high">PREDICTABLE</span> Token API · ~$3–5/dev/ngày khi quản context tốt</td>
+            <td class="featured"><span class="score s-high">PREDICTABLE</span> MIT free + token API · ~$20–200/tháng tự host</td>
+            <td><span class="score s-mid">VARIABLE</span> Token + LangSmith $39+/tháng nếu dùng observability</td>
+            <td><span class="score s-mid">VARIABLE</span> Token API · sandbox provider (E2B) tính riêng</td>
+            <td><span class="score s-mid">VARIABLE</span> Token + Mastra Cloud $99+/tháng</td>
+            <td><span class="score s-high">PREDICTABLE</span> Token only · Vercel hosting Pro $20/tháng</td>
+            <td><span class="score s-mid">VARIABLE</span> Token + CrewAI Enterprise tier</td>
+          </tr>
+          <tr>
+            <td class="row-label">Vendor lock-in</td>
+            <td class="featured"><span class="score s-mid">MEDIUM</span> Anthropic-only, nhưng MCP open-standard giảm switching cost</td>
+            <td class="featured"><span class="score s-high">LOW</span> MIT · multi-model · self-host</td>
+            <td><span class="score s-high">LOW</span> Provider-agnostic</td>
+            <td><span class="score s-mid">MEDIUM</span> OpenAI-tuned, GPT-4o + o3 best</td>
+            <td><span class="score s-high">LOW</span> 81 providers, 2,436 models</td>
+            <td><span class="score s-high">LOW</span> Multi-provider</td>
+            <td><span class="score s-high">LOW</span> Multi-provider</td>
+          </tr>
+          <tr>
+            <td class="row-label">Time-to-Market</td>
+            <td class="featured"><span class="score s-high">FAST</span> Hello-world &lt; 1 giờ · capstone agent &lt; 24 giờ</td>
+            <td class="featured"><span class="score s-mid">MEDIUM</span> Setup ~1 cuối tuần · sau đó just runs</td>
+            <td><span class="score s-low">SLOW</span> Steepest learning curve · graph mental model</td>
+            <td><span class="score s-high">FAST</span> Minimal boilerplate</td>
+            <td><span class="score s-high">FAST</span> Local dev playground</td>
+            <td><span class="score s-high">FAST</span> useChat hooks ship trong 1 ngày</td>
+            <td><span class="score s-mid">MEDIUM</span> Role abstraction dễ nhưng prod debug khó</td>
+          </tr>
+          <tr>
+            <td class="row-label">MCP support</td>
+            <td class="featured"><span class="score s-high">NATIVE</span> First-class · tạo bởi Anthropic</td>
+            <td class="featured"><span class="score s-high">NATIVE</span> MCP-native runtime</td>
+            <td><span class="score s-mid">PARTIAL</span> Adapter community</td>
+            <td><span class="score s-mid">PARTIAL</span> Community adapter</td>
+            <td><span class="score s-high">NATIVE</span> Shipped trong 6 tháng qua</td>
+            <td><span class="score s-high">NATIVE</span> Built-in</td>
+            <td><span class="score s-high">NATIVE</span> Built-in</td>
+          </tr>
+          <tr>
+            <td class="row-label">Team skill</td>
+            <td class="featured">Bất kỳ Python/TS dev có thể bắt đầu · docs Anthropic chính thức</td>
+            <td class="featured">Node.js + Docker basics · 1 senior backend</td>
+            <td>Đòi LangChain expert · graph thinking · senior level</td>
+            <td>Python dev junior+ ok</td>
+            <td>TS/Next.js dev</td>
+            <td>React/TS frontend dev</td>
+            <td>Python dev hiểu role-based design</td>
+          </tr>
+          <tr>
+            <td class="row-label">Production traction</td>
+            <td class="featured">Anthropic chính chủ · cùng harness Claude Code (1M+ repos)</td>
+            <td class="featured">180K stars · ClawHub 5,700+ skills · OpenClaw Managed Agents (2026)</td>
+            <td>400+ enterprises · Klarna 85M users · JPMorgan</td>
+            <td>19K stars · 10.3M dl/tháng · OpenAI ecosystem</td>
+            <td>Replit Agent 3 · SoftBank · Marsh McLennan 75K seats</td>
+            <td>Vercel core product · Next.js native</td>
+            <td>46K stars · startup-heavy</td>
+          </tr>
+          <tr>
+            <td class="row-label">Memory built-in</td>
+            <td class="featured">Compaction + session forking native</td>
+            <td class="featured">Persistent state · JSONL event log durable</td>
+            <td>Checkpointing (state, không phải semantic)</td>
+            <td>Manual</td>
+            <td>Built-in semantic memory</td>
+            <td>Manual</td>
+            <td>Built-in</td>
+          </tr>
+          <tr>
+            <td class="row-label">Vendor risk · Jan 2026 OAuth incident</td>
+            <td class="featured"><span class="score s-high">SAFE</span> Là chính chủ — gây ra quyết định</td>
+            <td class="featured"><span class="score s-mid">RECOVERED</span> Bị ảnh hưởng 1 tháng · giờ dùng API key trực tiếp</td>
+            <td><span class="score s-high">SAFE</span> Không phụ thuộc OAuth Anthropic</td>
+            <td><span class="score s-high">SAFE</span> OpenAI auth riêng</td>
+            <td><span class="score s-high">SAFE</span></td>
+            <td><span class="score s-high">SAFE</span></td>
+            <td><span class="score s-high">SAFE</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Cách đọc matrix này</div>
+      <p>Hai cột vàng <b>Claude Agent SDK</b> và <b>OpenClaw</b> không phải <em>winner ở mọi chiều</em>. Chúng là <b>winner khi xét cùng nhau</b>: SDK winning ở Time-to-Market + MCP + Production-grade; OpenClaw winning ở Vendor-lock-in + Self-host + Cost-predictability. Phần còn lại — chiến lược two-stack ở §05 — giải thích tại sao kết hợp này dominant.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: WHY CLAUDE AGENT SDK -->
+<section class="section section-anchor" id="why-sdk">
+  <div class="container">
+    <div class="section-intro">
+      <span class="section-label">§ 03 · Production Layer</span>
+      <h2>Tại sao chọn <em>Claude Agent SDK</em></h2>
+      <p>Cho tầng <em>agent embed trong sản phẩm khách hàng dùng</em>. Năm bằng chứng cụ thể, không lý thuyết.</p>
+    </div>
+
+    <div class="container-narrow" style="padding:0">
+      <div class="why-card">
+        <div class="why-num">01</div>
+        <div class="why-body">
+          <h5>Cùng harness <em>chạy Claude Code</em> đang được 1M+ repos dùng daily</h5>
+          <p>Agent SDK không phải framework "viết mới rồi quảng cáo". Nó là <b>cùng tool loop chạy Claude Code</b> — CLI tool 110,000 GitHub stars, 20.8M commits qua 1M+ repository. Khi anh build agent trên SDK này, anh đang đứng trên hạ tầng đã production-tested ở quy mô khổng lồ.</p>
+          <div class="why-evidence">Anthropic đổi tên Claude Code SDK → Claude Agent SDK cuối 2025 chính vì developer đang dùng nó cho mọi domain — research, video, finance — không chỉ coding.</div>
+        </div>
+      </div>
+
+      <div class="why-card">
+        <div class="why-num">02</div>
+        <div class="why-body">
+          <h5>MCP <em>first-class</em> — Anthropic chính là người định nghĩa spec</h5>
+          <p>Model Context Protocol là spec mở Anthropic publish, sau đó Vercel AI SDK, Mastra, CrewAI đều add support trong 6 tháng qua. Khi MCP server anh viết hôm nay sẽ work trên Claude Agent SDK <em>và</em> các framework khác, anh có <b>portability tự nhiên</b> — không lock-in toolchain dù chọn Anthropic làm primary.</p>
+          <div class="why-evidence">10,000+ MCP server đã sẵn có trong registry tính đến đầu 2026. GitHub, Slack, Gmail, Shopify, Playwright — cài là chạy.</div>
+        </div>
+      </div>
+
+      <div class="why-card">
+        <div class="why-num">03</div>
+        <div class="why-body">
+          <h5>Time-to-Market <em>nhanh nhất</em> trong nhóm provider SDK</h5>
+          <p>Hello-world chạy được trong &lt; 1 giờ. Capstone agent có MCP + subagent + hook + skill ship được trong &lt; 24 giờ tập trung. So với LangGraph (steepest learning curve trong tất cả framework theo cộng đồng), team anh tiết kiệm <b>2–4 tuần ramp-up</b> — đáng giá lương 1 senior engineer/tháng.</p>
+          <div class="why-evidence">Anthropic Academy có 16 khóa miễn phí kèm certificate. Junior dev có thể xong Claude 101 + Claude Code in Action trong 8 giờ.</div>
+        </div>
+      </div>
+
+      <div class="why-card">
+        <div class="why-num">04</div>
+        <div class="why-body">
+          <h5>Cost <em>predictable</em> với Sonnet là default</h5>
+          <p>Anthropic Docs công bố ~$6/dev/ngày trung bình. Với kỷ luật quản context (compaction ở 60%, Sonnet default cho 90% task, Opus reserved cho orchestrator), team anh đẩy được xuống <b>$3–5/dev/ngày</b>. Với LangChain + LangSmith hoặc CrewAI Enterprise, anh chịu thêm $39–99+/tháng platform fee — chi phí cố định không scale theo value tạo ra.</p>
+          <div class="why-evidence">5 nguyên tắc giữ chi phí dưới $5/ngày: default Sonnet · subagent nhỏ hơn parent · compact ở 60% · gitignore file lớn · hard limit trong settings.json.</div>
+        </div>
+      </div>
+
+      <div class="why-card">
+        <div class="why-num">05</div>
+        <div class="why-body">
+          <h5>Vendor risk <em>được đánh giá đúng</em>, không tô hồng</h5>
+          <p>Đây không phải SDK perfect. Anthropic-only — model lock-in là thật. Nhưng risk này <b>nhỏ hơn risk team kỹ thuật của anh không ship được</b>. Quality của model Sonnet 4.6 / Opus 4.7 đang dẫn đầu industry trong agentic task. Khi Anthropic có incident (đã xảy ra Jan 2026 OAuth shutdown), nó <em>chỉ ảnh hưởng third-party tools</em>, SDK chính chủ không bị động.</p>
+          <div class="why-evidence">Hedge cụ thể: Claude Agent SDK cho production-facing layer + OpenClaw cho internal automation. Nếu Anthropic có outage, internal automation vẫn chạy. §05 giải thích chi tiết.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: WHY OPENCLAW -->
+<section class="section alt-bg-2 section-anchor" id="why-openclaw">
+  <div class="container">
+    <div class="section-intro">
+      <span class="section-label">§ 04 · Automation + Hedge Layer</span>
+      <h2>Tại sao chọn <em>OpenClaw</em></h2>
+      <p>Cho tầng <em>tự động hóa nội bộ + hedge vendor risk</em>. OpenClaw không cạnh tranh với Claude Agent SDK — nó <b>làm điều SDK không làm</b>.</p>
+    </div>
+
+    <div class="container-narrow" style="padding:0">
+      <div class="why-card gold">
+        <div class="why-num">01</div>
+        <div class="why-body">
+          <h5>Self-hosted <em>data sovereignty</em></h5>
+          <p>Internal automation thường chạm dữ liệu nhạy cảm — email, customer data, tài chính, HR. Self-host trên VPS của anh có nghĩa <b>data không rời khỏi infrastructure của bạn</b>. Với SaaS-only framework, mọi tool call đều đi qua máy chủ vendor — auditable nhưng không owned.</p>
+          <div class="why-evidence">OpenClaw MIT license, Docker container per session, SQLite metadata local. Deploy anywhere Docker chạy được — VPS Vietnam, AWS, Hetzner, on-prem.</div>
+        </div>
+      </div>
+
+      <div class="why-card gold">
+        <div class="why-num">02</div>
+        <div class="why-body">
+          <h5>Multi-channel native — <em>nơi nhân sự đang làm việc</em></h5>
+          <p>Vietnamese team không sống trong terminal — họ sống trong Zalo, Telegram, Slack, Discord, đôi khi WhatsApp với khách quốc tế. OpenClaw ship multi-channel routing built-in: <b>một agent core, nhiều channel output</b>. Claude Agent SDK không có capability này natively — anh phải xây.</p>
+          <div class="why-evidence">15+ channel adapter sẵn: Telegram, WhatsApp, Discord, Slack, Signal, iMessage, email, webhook, web UI. Một agent reply ở channel nào tùy task type.</div>
+        </div>
+      </div>
+
+      <div class="why-card gold">
+        <div class="why-num">03</div>
+        <div class="why-body">
+          <h5>Multi-model <em>không lock-in</em> — hedge thật sự</h5>
+          <p>OpenClaw runtime cho phép swap Claude → Kimi → Llama → Gemini bằng config change, không phải rewrite code. Khi Anthropic có outage / giá tăng / model regression / OAuth incident (như Jan 2026), <b>internal automation của anh không dừng</b>. Đây là vendor hedge thực sự, không phải lý thuyết.</p>
+          <div class="why-evidence">Provider abstraction trong OpenClaw runtime — flag <code class="inline">CLAW_PROVIDER=anthropic</code> đổi sang <code class="inline">=openrouter</code> ship sang Kimi/Qwen ngay.</div>
+        </div>
+      </div>
+
+      <div class="why-card gold">
+        <div class="why-num">04</div>
+        <div class="why-body">
+          <h5>Cost <em>predictable</em> — không platform fee</h5>
+          <p>MIT license = $0 framework cost. Anh chỉ trả token API ($20–200/tháng cho personal, scale theo volume). So với Mastra Cloud $99+/tháng, LangSmith $39+/tháng, CrewAI Enterprise tier — anh tiết kiệm $1,000–3,000/năm <b>chỉ riêng tier subscription</b> nếu chạy 5–10 agent internal.</p>
+          <div class="why-evidence">ClawHub 5,700+ community skill miễn phí. CRM integration, scraping pattern, scheduling pattern — đa phần không phải build từ đầu.</div>
+        </div>
+      </div>
+
+      <div class="why-card gold">
+        <div class="why-num">05</div>
+        <div class="why-body">
+          <h5>Open-source <em>không cô đơn</em> — 180K stars community</h5>
+          <p>Risk lớn nhất với open-source là "nếu maintainer bỏ chạy?" OpenClaw đã vượt qua threshold này: 180,000+ GitHub stars là largest open-source agent framework hiện tại; ClawHub có 5,700+ contributor publish skills. Khi anh hit edge case, có khả năng cao đã có người gặp và fix.</p>
+          <div class="why-evidence">OpenClaw Managed Agents (2026) là cloud service do contributor cộng đồng xây dựng — bằng chứng ecosystem đang grow chứ không stall.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: TWO-STACK MODEL -->
+<section class="section section-anchor" id="two-stack">
+  <div class="container">
+    <div class="section-intro">
+      <span class="section-label">§ 05 · The Two-Stack Model</span>
+      <h2>Cách hai SDK <em>complement</em>, không cạnh tranh</h2>
+      <p>Đây là điểm mấu chốt của recommendation. Đa số CEO sai vì cố chọn <em>một</em> framework làm <em>tất cả</em>. Sự thật: <b>hai layer khác nhau cần hai tool khác nhau</b>.</p>
+    </div>
+
+    <div class="container-narrow" style="padding:0">
+      <div class="diagram-wrap">
+        <div class="diagram-title">Two-Stack Architecture · CEO Mental Model</div>
+
+        <div class="diagram-grid">
+          <div class="diagram-side left">
+            <div class="side-tag">Production Layer</div>
+            <div class="side-name">Claude Agent SDK</div>
+            <div class="side-role">Agent <b>khách hàng</b> tương tác · embed trong product / SaaS / customer-facing app</div>
+            <ul class="side-features">
+              <li>Tốc độ ship feature mới ưu tiên</li>
+              <li>Quality model là KPI quan trọng nhất</li>
+              <li>Anthropic infrastructure managed</li>
+              <li>Production traffic · scale dài hạn</li>
+              <li>Customer trust · need official vendor backing</li>
+            </ul>
+          </div>
+
+          <div class="connector">
+            <div class="connector-icon">MCP<br>SHARED</div>
+          </div>
+
+          <div class="diagram-side right">
+            <div class="side-tag">Automation Layer</div>
+            <div class="side-name">OpenClaw</div>
+            <div class="side-role">Agent <b>nội bộ team</b> dùng · automation, monitoring, reporting trên Telegram/Slack</div>
+            <ul class="side-features">
+              <li>Cost predictable là KPI quan trọng nhất</li>
+              <li>Data sovereignty cần thiết</li>
+              <li>Self-hosted infrastructure</li>
+              <li>Internal traffic · low-volume nhưng critical</li>
+              <li>Vendor hedge · multi-model fallback</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="diagram-bottom">
+          <b>Lớp chia sẻ:</b> MCP server. Tool nào anh viết một lần (Shopify connector, internal CRM connector, Klaviyo writer) sẽ chạy được trên <b>cả hai stack</b>. Đây là lý do quyết định two-stack không nhân đôi chi phí dev — tool layer dùng chung.
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Tại sao không chỉ chọn một?</div>
+        <p><b>Chọn chỉ Agent SDK:</b> internal automation phải build từ đầu (multi-channel routing, scheduler, persistent state). Mất 2–3 tháng dev và vendor lock-in cao. <b>Chọn chỉ OpenClaw:</b> production agent thiếu Anthropic-quality MCP integration và bị customer hỏi "tại sao agent đôi lúc trả lời sai" — không có warranty từ vendor chính chủ. <b>Chọn cả hai:</b> mỗi tool làm việc nó best-fit, MCP server dùng chung — đây là Pareto-optimal cho operator Việt 2026.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: CEO DECISION FRAMEWORK -->
+<section class="section alt-bg section-anchor" id="decision">
+  <div class="container">
+    <div class="section-intro">
+      <span class="section-label">§ 06 · CEO Decision Scorecard</span>
+      <h2>4 chiều quyết định — <em>mỗi chiều có winner rõ ràng</em></h2>
+      <p>CEO không cần đánh giá 47 feature comparison như tech lead. CEO cần biết <b>4 chiều</b> dưới đây winner là ai và tại sao.</p>
+    </div>
+
+    <div class="container-narrow" style="padding:0">
+      <div class="decision-grid">
+
+        <div class="dec-card">
+          <div class="dec-icon">$</div>
+          <h5>Cost <em>Predictability</em></h5>
+          <div class="dec-en">Khi CFO hỏi "chi phí 12 tháng tới?" anh trả lời được không?</div>
+          <div class="dec-rows">
+            <div class="dec-row win">
+              <span class="lbl">Winner</span>
+              <span class="val"><b>Agent SDK + OpenClaw</b></span>
+            </div>
+            <div class="dec-row">
+              <span class="lbl">Loser</span>
+              <span class="val">LangChain + LangSmith stack</span>
+            </div>
+            <div class="dec-row">
+              <span class="lbl">Lý do</span>
+              <span class="val">Token-only, không platform fee</span>
+            </div>
+            <div class="dec-row">
+              <span class="lbl">Tiết kiệm/năm</span>
+              <span class="val">$1,200–3,600 với 5–10 agent</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dec-card">
+          <div class="dec-icon">⚡</div>
+          <h5>Time-to-<em>Market</em></h5>
+          <div class="dec-en">Pilot agent đầu tiên ship vào tay user bao lâu?</div>
+          <div class="dec-rows">
+            <div class="dec-row win">
+              <span class="lbl">Winner</span>
+              <span class="val"><b>Claude Agent SDK</b></span>
+            </div>
+            <div class="dec-row">
+              <span class="lbl">Loser</span>
+              <span class="val">LangGraph (steepest learning)</span>
+            </div>
+            <div class="dec-row">
+              <span class="lbl">Hello-world</span>
+              <span class="val">&lt; 1 giờ với SDK</span>
+            </div>
+            <div class="dec-row">
+              <span class="lbl">First production</span>
+              <span class="val">2–3 tuần với senior dev</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dec-card">
+          <div class="dec-icon">人</div>
+          <h5>Team <em>Skill</em></h5>
+          <div class="dec-en">Hiring landscape Việt Nam — tìm dev biết stack có dễ?</div>
+          <div class="dec-rows">
+            <div class="dec-row win">
+              <span class="lbl">Winner</span>
+              <span class="val"><b>Agent SDK + OpenClaw</b></span>
+            </div>
+            <div class="dec-row">
+              <span class="lbl">Loser</span>
+              <span class="val">Microsoft Agent Framework (.NET niche)</span>
+            </div>
+            <div class="dec-row">
+              <span class="lbl">Skill cần</span>
+              <span class="val">Python hoặc TypeScript + Docker</span>
+            </div>
+            <div class="dec-row">
+              <span class="lbl">Talent pool VN</span>
+              <span class="val">Hàng chục nghìn dev TS/Python</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dec-card">
+          <div class="dec-icon">⚐</div>
+          <h5>Vendor <em>Risk</em></h5>
+          <div class="dec-en">Anthropic outage / OpenAI policy change — anh có chết không?</div>
+          <div class="dec-rows">
+            <div class="dec-row win">
+              <span class="lbl">Winner</span>
+              <span class="val"><b>OpenClaw layer</b> hedge cho SDK layer</span>
+            </div>
+            <div class="dec-row">
+              <span class="lbl">Loser</span>
+              <span class="val">Pure single-vendor stack</span>
+            </div>
+            <div class="dec-row">
+              <span class="lbl">Mechanism</span>
+              <span class="val">Multi-model swap qua config</span>
+            </div>
+            <div class="dec-row">
+              <span class="lbl">Recovery time</span>
+              <span class="val">&lt; 1 giờ khi vendor có outage</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Verdict cho CEO Vietnamese SME 2026</div>
+        <p>Trong cả 4 chiều, lựa chọn <b>Claude Agent SDK + OpenClaw two-stack</b> đều ở vị trí winner hoặc co-winner. Không có framework nào khác làm được điều tương tự ở mức chi phí và thời gian này. Đây không phải lý thuyết — đây là deployment pattern thực tế đã chứng minh ở SME tech operator Việt Nam quý 1/2026.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: MIGRATION PATH -->
+<section class="section section-anchor" id="migration">
+  <div class="container">
+    <div class="section-intro">
+      <span class="section-label">§ 07 · Migration Path</span>
+      <h2>Lộ trình <em>90 ngày</em> roll-out two-stack</h2>
+      <p>Không cần big-bang migration. Ba giai đoạn 30 ngày, mỗi giai đoạn có deliverable cụ thể CEO check được.</p>
+    </div>
+
+    <div class="container-narrow" style="padding:0">
+
+      <div class="timeline">
+        <div class="tl-row">
+          <div class="tl-period">Ngày 0–30</div>
+          <div class="tl-body">
+            <h5>Pilot Claude Agent SDK · 1 use case sản phẩm</h5>
+            <p>Chọn 1 feature hiện tại đang manual hoặc đang dùng prompt-only LLM call. Refactor sang Agent SDK với 1 custom tool + 1 MCP server. Senior dev (1 người) ship trong 30 ngày. Mục tiêu: có production agent thật chạy với traffic thật, đo được latency và cost/request.</p>
+            <span class="tl-deliverable">Deliverable · Production agent v1</span>
+          </div>
+        </div>
+
+        <div class="tl-row gold">
+          <div class="tl-period">Ngày 31–60</div>
+          <div class="tl-body">
+            <h5>Setup OpenClaw · 3 internal automation</h5>
+            <p>VPS Hetzner / VPS Việt Nam, deploy OpenClaw qua Docker. Connect 3 channel: Telegram cho team Operations, Slack cho Engineering, email webhook cho CEO. Build 3 use case: daily competitor SERP brief, weekly TikTok Shop top viral product, monthly cost dashboard. Tận dụng MCP server đã viết ở giai đoạn 1.</p>
+            <span class="tl-deliverable">Deliverable · 3 internal agent live</span>
+          </div>
+        </div>
+
+        <div class="tl-row">
+          <div class="tl-period">Ngày 61–90</div>
+          <div class="tl-body">
+            <h5>Scale + Hedge test</h5>
+            <p>Mở rộng Agent SDK production layer thêm 2 feature mới. Mở rộng OpenClaw lên 5–7 internal automation. <b>Quan trọng nhất:</b> simulate Anthropic outage — switch OpenClaw provider sang Kimi/Qwen, verify internal automation vẫn chạy. Đây là vendor risk drill thực sự, không lý thuyết. Cuối quý: Cost report, ROI report, hiring plan year 2.</p>
+            <span class="tl-deliverable">Deliverable · Vendor risk drill PASS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Budget thực tế cho 90 ngày này</div>
+        <p>1 senior dev (full-time, $2,000–4,000/tháng VN) × 3 tháng = <b>$6,000–12,000</b>. Token cost trong giai đoạn pilot ~$300–600/tháng × 3 = <b>$900–1,800</b>. VPS cho OpenClaw $20–50/tháng × 3 = <b>$60–150</b>. Tổng đầu tư 90 ngày: <b>$7,000–14,000</b> để có hai-stack agent production-ready. So sánh: chi phí thuê 1 nhân viên junior thay agent này làm tay = $2,000–3,000/tháng × 12 = $24,000–36,000/năm — và không scale được.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="container">
+    <div class="closing-inner">
+      <div class="closing-badge">Decision Made · Move Now</div>
+      <h2>Quyết định <em>two-stack</em> không cần đợi.</h2>
+      <p>Mỗi tháng anh trì hoãn = 1 tháng đối thủ tiến lên. Mỗi tháng anh chọn <em>nhầm framework</em> = 2–3 tháng tech debt phải refactor sau. Quyết định đúng hôm nay: <b>Claude Agent SDK + OpenClaw</b>. Triển khai bắt đầu Monday.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h5>Agent SDK Decision Brief · 2026</h5>
+        <p>One-page recommendation cho CEO/Founder Việt Nam đánh giá agent framework để build production agent + internal automation. Phần của series Claude Agents Mastery Track.</p>
+      </div>
+      <div class="foot-meta">
+        <h6>Source nguồn</h6>
+        Anthropic Engineering · docs.claude.com<br>
+        github.com/anthropics<br>
+        modelcontextprotocol.io<br>
+        OpenClaw GitHub repository<br>
+        <br>
+        <h6>Phiên bản</h6>
+        v.04.2026 · Tổng hợp từ nguồn chính thống Anthropic + open-source community
+      </div>
+    </div>
+    <div class="foot-bottom">
+      © 2026 · Agent SDK Decision Brief · Two-Stack Strategy for Vietnamese SME
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
